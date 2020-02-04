@@ -72,6 +72,12 @@ CJ.GetCurrentJob = function()
     return currentJobData.job or 'unkown'
 end
 
+CJ.GetCurrentJobLabel = function()
+    local currentJobData = CJ.CurrentJobData or {}
+
+    return currentJobData.name or 'Unkown'
+end
+
 RegisterNetEvent('mlx:playerLoaded')
 AddEventHandler('mlx:playerLoaded', function(xPlayer)
     CJ.ESX.PlayerData = xPlayer

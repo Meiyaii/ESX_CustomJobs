@@ -1,6 +1,7 @@
 Config                  = {}
 Config.Locale           = 'nl'
 Config.DrawDistance     = 100
+
 Config.Marker = {                           -- Markers
     Type = 1,                               -- Type
 
@@ -28,4 +29,16 @@ Config.Marker = {                           -- Markers
         x = 5.0,    y = 5.0,    z = 0.5,    -- > Size
         r = 0,      g = 255,    b = 0       -- > Color
     },
+}
+
+Config.Colors = {
+    Green       = 3066993,
+    Grey        = 9807270,
+    Red         = 15158332,
+    Orange      = 15105570,
+    Blue        = 3447003,
+    Purple      = 10181046,
+    Yellow      = 15844367,
+    DarkGreen   = 2600544,
+    DarkRed     = 12597547
 }

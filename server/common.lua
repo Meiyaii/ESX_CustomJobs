@@ -299,7 +299,7 @@ CJ.AddOrUpdateJobs = function()
                             label = jobData.JobName,
                             whitelisted = jobData.Whitelisted
                         }
-            
+
                         CJ.ESX.Jobs[jobName].grades = {}
                     end
 
@@ -346,6 +346,116 @@ CJ.LoadCurrentVersion = function()
     else
         CJ.Version = currentVersion
     end
+end
+
+CJ.GetCurrentJob = function(source)
+    local xPlayer = CJ.ESX.GetPlayerFromId(source)
+    local currentJob = xPlayer.job or {}
+    local currentJobName = currentJob.name or 'unkown'
+
+    for jobName, jobData in pairs(CJ.Jobs) do
+        if (string.lower(jobName) == string.lower(currentJobName)) then
+            return jobName
+        end
+    end
+
+    return false
+end
+
+CJ.GetCurrentLabel = function(source)
+    local xPlayer = CJ.ESX.GetPlayerFromId(source)
+    local currentJob = xPlayer.job or {}
+    local currentJobName = currentJob.name or 'unkown'
+
+    for jobName, jobData in pairs(CJ.Jobs) do
+        if (string.lower(jobName) == string.lower(currentJobName)) then
+            return jobData.JobName
+        end
+    end
+
+    return false
+end
+
+CJ.GetCurrentJobWebhooks = function(source)
+    local currentJob = CJ.GetCurrentJob(source)
+
+    if (not currentJob) then
+        return {}
+    end
+
+    if (CJ.Jobs ~= nil and CJ.Jobs[currentJob] ~= nil) then
+        return CJ.Jobs[currentJob].Wehbooks or {}
+    end
+
+    return {}
+end
+
+CJ.LogToDiscord = function(source, title, message, msgType, color)
+    color = color or Config.Colors.Grey
+
+    local jobLabel = CJ.GetCurrentLabel(source)
+    local webhooks = CJ.GetCurrentJobWebhooks(source)
+    local webhook = ''
+
+    if (string.lower(msgType) == 'actions') then
+        webhook = webhooks.Actions or ''
+    elseif (string.lower(msgType) == 'safe') then
+        webhook = webhooks.Safe or ''
+    elseif (string.lower(msgType) == 'money') then
+        webhook = webhooks.Money or ''
+    elseif (string.lower(msgType) == 'employee') then
+        webhook = webhooks.Employee or ''
+    end
+
+    if (webhook == nil or webhook == '') then
+        return
+    end
+
+    local discordInfo = {
+        ["color"] = color,
+        ["type"] = "rich",
+        ["title"] = title,
+        ["description"] = message,
+        ["footer"] = {
+            ["text"] = jobLabel .. ' | ' .. CJ.GetSteamIdentifier(source) .. ' | ' .. CJ.GetCurrentTime()
+        }
+    }
+
+    PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({ username = jobLabel .. ' | Logs | ' .. CJ.Version, embeds = { discordInfo } }), { ['Content-Type'] = 'application/json' })
+end
+
+CJ.GetSteamIdentifier = function(source)
+    if (source == nil) then
+        return ''
+    end
+
+    local playerId = tonumber(source)
+
+    if (playerId <= 0) then
+        return ''
+    end
+
+    local identifiers, steamIdentifier = GetPlayerIdentifiers(source)
+
+    for _, identifier in pairs(identifiers) do
+        if (string.match(string.lower(identifier), 'steam:')) then
+            steamIdentifier = identifier
+        end
+    end
+
+    return steamIdentifier
+end
+
+CJ.GetCurrentTime = function()
+    local date_table = os.date("*t")
+	local hour, minute, second = date_table.hour, date_table.min, date_table.sec
+	local year, month, day = date_table.year, date_table.month, date_table.day
+
+    if (string.lower(Config.Locale) == 'nl') then
+        return string.format("%d-%d-%d %d:%d:%d", day, month, year, hour, minute, second)
+    end
+
+    return string.format("%d-%d-%d %d:%d:%d", year, month, day, hour, minute, second)
 end
 
 CJ.ESX.RegisterServerCallback('esx_customjobs:getJobs', function(source, cb)

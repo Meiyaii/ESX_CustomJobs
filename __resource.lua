@@ -20,6 +20,8 @@ server_scripts {
 
     'shared/functions.lua',
 
+    'server/menus/safe_menu.lua',
+
     'server/main.lua'
 }
 
