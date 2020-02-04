@@ -1,0 +1,37 @@
+{
+    "JobName": "Biker",
+    "Job": "biker",
+    "Whitelisted": true,
+    "Grades": [
+        { 
+            "grade": 0,
+            "name": "prospect",
+            "label": "Prospect",
+            "salary": 600
+        },
+        { 
+            "grade": 1,
+            "name": "enforcer",
+            "label": "Enforcer",
+            "salary": 700
+        },
+        { 
+            "grade": 2,
+            "name": "roadcaptain",
+            "label": "Road Captain",
+            "salary": 800
+        },
+        { 
+            "grade": 3,
+            "name": "vicepresident",
+            "label": "Vice President",
+            "salary": 900
+        },
+        { 
+            "grade": 4,
+            "name": "boss",
+            "label": "President",
+            "salary": 1000
+        }
+    ]
+}
