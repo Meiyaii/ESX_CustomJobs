@@ -5,10 +5,11 @@ author 'TigoDevelopment'
 contact 'me@tigodev.com'
 version '0.0.1'
 
-description 'This is a repsitory where you can create your own jobs and it is easier to expand it. Here jobs have a possibility for an F6 menu.'
+description 'This is a repsitory where you can create your own jobs and it is easier to expand it.'
 
 server_scripts {
     '@es_extended/locale.lua',
+    '@mysql-async/lib/MySQL.lua',
 
     'locales/en.lua',
     'locales/nl.lua',
@@ -28,5 +29,16 @@ client_scripts {
     'locales/en.lua',
     'locales/nl.lua',
 
+    'config.lua',
+
+    'client/common.lua',
+
+    'shared/functions.lua',
+
     'client/main.lua'
+}
+
+dependencies {
+    'es_extended',
+    'mysql-async'
 }

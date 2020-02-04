@@ -70,5 +70,9 @@
         "safe.item.*",
         "safe.weapon.*",
         "safe.dirtymoney.*"
-    ]
+    ],
+    "Positions": {
+        "ItemSafe": { "x": 563.5, "y": -3127.04, "z": 17.77 },
+        "WeaponSafe": { "x": 575.41, "y": -3121.4, "z": 17.77 }
+    }
 }
