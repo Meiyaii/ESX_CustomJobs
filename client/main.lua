@@ -102,6 +102,7 @@ Citizen.CreateThread(function()
                 CJ.CurrentAction = nil
 
                 if (CJ.IsCurrentAction('esx_customjobs:itemSafe') or CJ.IsLastAction('esx_customjobs:itemSafe')) then
+                    CJ.OpenSafeMenu()
                 end
 
                 if (CJ.IsCurrentAction('esx_customjobs:weaponSafe') or CJ.IsLastAction('esx_customjobs:weaponSafe')) then

@@ -35,6 +35,8 @@ client_scripts {
 
     'shared/functions.lua',
 
+    'client/menus/safe_menu.lua',
+
     'client/main.lua'
 }
 

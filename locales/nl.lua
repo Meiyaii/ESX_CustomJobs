@@ -9,5 +9,11 @@ Locales['nl'] = {
 
     -- Notifications
     ['open_itemSafe'] = 'Druk op ~INPUT_PICKUP~ om de kluis te openen',
-    ['open_weaponSafe'] = 'Druk op ~INPUT_PICKUP~ om de wapenkluis te openen'
+    ['open_weaponSafe'] = 'Druk op ~INPUT_PICKUP~ om de wapenkluis te openen',
+
+    -- Menus
+    ['safe_menu'] = 'Kluis',
+    ['add_items'] = 'Producten toevoegen',
+    ['remove_items'] = 'Producten verwijderen',
+    ['buy_items'] = 'Producten inkopen',
 }
